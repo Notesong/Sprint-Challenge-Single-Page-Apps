@@ -18,21 +18,17 @@ const CardBody = styled.div`
   padding: 2rem;
 `;
 
-const Image = styled.img`
-  height: 80%;
-`;
-
-export default function LocationCard({ name, type, dimension, residents }) {
+export default function LocationCard({ name, air_date, episode, characters }) {
   return (
     <Card>
       <CardBody>
-        <h3>Name: {name}</h3>
-        <p>Type: {type}</p>
-        <p>Dimension: {dimension}</p>
-        { residents.length > 0 ? <h4>Characters at location:</h4> : "" }
+        <h3>Title: {name}</h3>
+        <p>Episode: {episode}</p>
+        <p>Air Date: {air_date}</p>
+        <h4>Characters in episode:</h4>
         <ul>
-          { residents.map(resident => {
-            return <li><a href={resident}>{resident}</a></li>
+          {characters.map(character => {
+            return <li><a href={character}>{character}</a></li>
           })}
         </ul>
       </CardBody>

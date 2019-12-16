@@ -13,6 +13,10 @@ const CharacterListContainer = styled.div`
   justify-content: space-around;
 `;
 
+const ComponentTitle = styled.h2`
+    text-align: center;
+`;
+
 export default function CharacterList() {
   // state setup for the character list. This list will not change outside of initial set up.
   // characterList is only used to support searches by way of filter() in SearchForm
@@ -39,6 +43,7 @@ export default function CharacterList() {
   return (
     // displays the character section, including the searchbox and character list
     <section className="character-section">
+      <ComponentTitle>Characters</ComponentTitle>
       {/* render the search form */}
       <Route render={(props) => (
         <SearchForm 
