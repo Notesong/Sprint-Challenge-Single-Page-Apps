@@ -29,8 +29,10 @@ export default function LocationCard({ name, type, dimension, residents }) {
         <h3>Name: {name}</h3>
         <p>Type: {type}</p>
         <p>Dimension: {dimension}</p>
+        {/* check if there are any characters at location before displaying */}
         { residents.length > 0 ? <h4>Characters at location:</h4> : "" }
         <ul>
+          {/* map through all the residents to create list */}
           { residents.map(resident => {
             return <li><a href={resident}>{resident}</a></li>
           })}

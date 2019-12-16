@@ -27,6 +27,7 @@ export default function LocationCard({ name, air_date, episode, characters }) {
         <p>Air Date: {air_date}</p>
         <h4>Characters in episode:</h4>
         <ul>
+          {/* map through all the characters to create list */}
           {characters.map(character => {
             return <li><a href={character}>{character}</a></li>
           })}
