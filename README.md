@@ -27,7 +27,7 @@ Demonstrate your understanding of this Sprint's concepts by answering the follow
 
 - [ ]  Explain benefit(s) using `client-side routing`?
 
-> Answer:
+> Answer: Client-side routing happens when the routing is done on the user's end, instead of through the server.  When this is done, there is less lag time during page changes, both because the components have already been loaded on the client's side and also because only the changed or linked compoenent needs to be reloaded, not the entire page.
 
 ## Project Set Up
 
