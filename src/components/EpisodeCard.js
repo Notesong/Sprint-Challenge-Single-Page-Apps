@@ -18,26 +18,20 @@ const CardBody = styled.div`
   padding: 2rem;
 `;
 
-const CardImage = styled.div`
-  width: 40%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Image = styled.img`
-  height: 80%;
-`;
-
-export default function CharacterCard({ character }) {
+export default function LocationCard({ name, air_date, episode, characters }) {
   return (
     <Card>
-      <CardImage>
-        <Image src={character.image} alt={character.name} />
-      </CardImage>
       <CardBody>
-        <h3>{character.name}</h3>
-        <p>Orgin: {character.origin.name}</p>
+        <h3>Title: {name}</h3>
+        <p>Episode: {episode}</p>
+        <p>Air Date: {air_date}</p>
+        <h4>Characters in episode:</h4>
+        <ul>
+          {/* map through all the characters to create list */}
+          {characters.map(character => {
+            return <li><a href={character}>{character}</a></li>
+          })}
+        </ul>
       </CardBody>
     </Card>
   );

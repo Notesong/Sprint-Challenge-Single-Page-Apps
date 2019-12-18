@@ -1,16 +1,65 @@
 import React, { useEffect, useState } from "react";
+import {Route} from "react-router-dom";
+import axios from 'axios';
+import CharacterCard from "./CharacterCard";
+import SearchForm from "./SearchForm";
+import styled from "styled-components";
+
+
+const CharacterListContainer = styled.div`
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  justify-content: space-around;
+`;
+
+const ComponentTitle = styled.h2`
+    text-align: center;
+`;
 
 export default function CharacterList() {
-  // TODO: Add useState to track data from useEffect
+  // state setup for the character list. This list will not change outside of initial set up.
+  // characterList is only used to support searches by way of filter() in SearchForm
+  const [characterList, setCharacterList] = useState([]);
+  // set up changeable state for searches. Used in character card creation.
+  const [searchResults, setSearchResults] = useState([]);
 
   useEffect(() => {
-    // TODO: Add API Request here - must run in `useEffect`
-    //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
+    // create axios call to get character information from the server
+    axios
+      .get(`https://rickandmortyapi.com/api/character/`)
+      .then(response => {
+        const charList = response.data.results;
+        console.log(charList);
+        // set the retrieved information to characterList and a copy to searchResults
+        setCharacterList(charList);
+        setSearchResults(charList);
+      })
+      .catch(error => {
+        console.log("The data was not returned", error);
+      })
   }, []);
 
   return (
-    <section className="character-list">
-      <h2>TODO: `array.map()` over your state here!</h2>
+    // displays the character section, including the searchbox and character list
+    <section className="character-section">
+      <ComponentTitle>Characters</ComponentTitle>
+      {/* render the search form */}
+      <Route render={(props) => (
+        <SearchForm 
+          {...props}
+          searchResults={searchResults}
+          setSearchResults={setSearchResults}
+          characterList={characterList}
+        />
+      )} />
+      {/* render the character list from searchResults by mapping over it */}
+      <CharacterListContainer>
+            {searchResults.map(character => {
+              return <CharacterCard key={character.id} character={character} />
+            })}
+      </CharacterListContainer>
     </section>
+
   );
 }
